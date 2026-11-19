@@ -155,6 +155,20 @@ func ShearZ3D(shearX, shearY float32) Mat4 {
 	return Mat4{1, 0, 0, 0, 0, 1, 0, 0, float32(shearX), float32(shearY), 1, 0, 0, 0, 0, 1}
 }
 
+// Shear3D creates a homogeneous 3D shear matrix combining the three
+// axis-pair shear factors:
+//
+//	[[ 1      xy xz 0 ]]
+//	[[ 0      1  yz 0 ]]
+//	[[ 0      0  1  0 ]]
+//	[[ 0      0  0  1 ]]
+//
+// That is, x' = x + xy*y + xz*z, y' = y + yz*z and z' = z. This is the
+// shear convention used by Mat4.Decompose and ComposeTransform.
+func Shear3D(shearXY, shearXZ, shearYZ float32) Mat4 {
+	return Mat4{1, 0, 0, 0, float32(shearXY), 1, 0, 0, float32(shearXZ), float32(shearYZ), 1, 0, 0, 0, 0, 1}
+}
+
 // HomogRotate3D creates a 3D rotation Matrix that rotates by (radian) angle about some arbitrary axis given by a normalized Vector.
 // It produces a homogeneous matrix (4x4)
 //
